@@ -3,4 +3,29 @@
     <string name="no_item">Não foi possível realizar o download dos itens</string>
     <string name="network_msg">Sem Conexão com a internet. Estabeleça uma conexão e tente
         novamente </string>
+
+    <!-- MainActivity-->
+    <string name="neighbor_city">%1$s - %2$s</string>
+    <string name="area">%1$s metros quadrado de área total</string>
+
+    <!-- PropertyDetailActivity-->
+    <string name="values">Valores</string>
+    <string name="sale_price">Preço de venda: %1$s</string>
+    <string name="cond_price">Preço do Condomínio: %1$s</string>
+    <string name="iptu_price">Preço de IPTU: %1$s</string>
+
+    <string name="location">Localização</string>
+    <string name="street_number">%1$s , %2$s</string>
+
+    <string name="detail">Detalhes</string>
+    <string name="dorm">%1$s dormitórios</string>
+    <string name="suite">%1$s suítes</string>
+    <string name="park">%1$s vagas</string>
+
+    <string name="charac">Características</string>
+    <string name="info">Informações Complementares</string>
+    <string name="ads">Anunciante</string>
+    <string name="date">Data da última atualização</string>
+
+
 </resources>

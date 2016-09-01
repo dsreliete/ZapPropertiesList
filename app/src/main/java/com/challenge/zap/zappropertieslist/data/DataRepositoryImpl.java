@@ -4,7 +4,9 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.challenge.zap.zappropertieslist.data.model.Model;
+import com.challenge.zap.zappropertieslist.data.model.ModelDetail;
 import com.challenge.zap.zappropertieslist.data.model.Property;
+import com.challenge.zap.zappropertieslist.data.model.PropertyDetail;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApi;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApiManager;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApiManagerImpl;
@@ -22,9 +24,9 @@ public class DataRepositoryImpl implements DataRepository {
 
     private List<Property> propertyList;
     private boolean handler;
+    private ModelDetail property;
     private ZapImoveisApiManager manager = new ZapImoveisApiManagerImpl();
     private ZapImoveisApi zapImoveisApi = manager.getZapImoveisApiInstance();
-
 
     @Override
     public void getPropertiesList(final getListOnFinishedListener listener) {
@@ -54,6 +56,43 @@ public class DataRepositoryImpl implements DataRepository {
             public void run() {
                 Log.e("eliete", "list =  "+ list);
                 listener.onFinishedList(list);
+            }
+        });
+    }
+
+    @Override
+    public void getDetailProperty(final getDetailOnFinishedListener listener, int codProperty) {
+        zapImoveisApi.getPropertyDetail(codProperty).enqueue(new Callback<ModelDetail>() {
+            @Override
+            public void onResponse(Call<ModelDetail> call, Response<ModelDetail> response) {
+                Log.e("eliete", "response.raw() " + response.raw());
+                if (response.isSuccessful()){
+                    property = response.body();
+                    Log.e("eliete", "response.body " + response.body());
+                    returnPropertyDetail(property, listener);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelDetail> call, Throwable t) {
+                property = null;
+                returnPropertyDetail(property, listener);
+            }
+        });
+    }
+
+    public void returnPropertyDetail(final ModelDetail modelProperty,
+                                   final getDetailOnFinishedListener listener) {
+        handler = new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                PropertyDetail propertyDetail = null;
+                if (modelProperty.getProperty() != null){
+                    if (modelProperty.getProperty() != null){
+                        propertyDetail = modelProperty.getProperty();
+                    }
+                }
+                listener.onFinishedDetail(propertyDetail);
             }
         });
     }

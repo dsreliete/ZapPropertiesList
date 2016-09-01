@@ -1,15 +1,27 @@
 package com.challenge.zap.zappropertieslist.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 /**
  * Created by eliete on 8/30/16.
  */
-public class Address {
+public class Address implements Serializable {
 
+    @SerializedName("Logradouro")
     public String street;
+    @SerializedName("Numero")
     public String number;
+    @SerializedName("Cidade")
     public String city;
+    @SerializedName("Bairro")
     public String neighborhood;
+    @SerializedName("Zona")
     public String zone;
+    @SerializedName("Complemento")
+    public String complement;
+
 
     public String getStreet() {
         return street;
@@ -51,13 +63,23 @@ public class Address {
         this.zone = zone;
     }
 
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
+
     @Override
     public String toString() {
-        return "Address = " +
-                street + "," +
-                number + "," +
-                city + "," +
-                neighborhood + "," +
-                zone;
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", city='" + city + '\'' +
+                ", neighborhood='" + neighborhood + '\'' +
+                ", zone='" + zone + '\'' +
+                ", complement='" + complement + '\'' +
+                '}';
     }
 }

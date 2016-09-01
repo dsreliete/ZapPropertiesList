@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.challenge.zap.zappropertieslist.AlertDialogFragment;
 import com.challenge.zap.zappropertieslist.R;
-import com.challenge.zap.zappropertieslist.data.model.Property;
 import com.challenge.zap.zappropertieslist.data.DataRepositoryImpl;
+import com.challenge.zap.zappropertieslist.data.model.Property;
 import com.challenge.zap.zappropertieslist.propertyDetail.PropertyDetailActivity;
 
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String EXTRA_CODE = "codeProperty";
     public static final String EXTRA_POSITION = "position";
+    public static final String EXTRA_URL = "url";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -44,6 +45,7 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
     private List<Property> propertyList = new ArrayList<>();
     private PropertyAdapter adapter;
     private int lastVisiblePosition;
+    private String urlImage;
     private LinearLayoutManager layoutManager;
 
     @Override
@@ -119,7 +121,8 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
     public void showPropertyDetailActivity(Property property) {
         if (property != null) {
             Intent intent = new Intent(this, PropertyDetailActivity.class);
-            intent.putExtra(EXTRA_CODE, property.getCodImovel());
+            intent.putExtra(EXTRA_CODE, property.getCodeProperty());
+            intent.putExtra(EXTRA_URL, property.getUrlImage());
             startActivity(intent);
         }
     }
@@ -138,13 +141,15 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(MainActivity.EXTRA_POSITION, layoutManager.findLastVisibleItemPosition());
+        outState.putInt(EXTRA_POSITION, layoutManager.findLastVisibleItemPosition());
+        outState.putString(EXTRA_URL, urlImage);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        lastVisiblePosition = savedInstanceState.getInt(MainActivity.EXTRA_POSITION);
+        lastVisiblePosition = savedInstanceState.getInt(EXTRA_POSITION);
+        urlImage = savedInstanceState.getString(EXTRA_URL);
     }
 
     @Override

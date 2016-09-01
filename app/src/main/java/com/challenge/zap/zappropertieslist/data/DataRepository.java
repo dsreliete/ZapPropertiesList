@@ -1,6 +1,7 @@
 package com.challenge.zap.zappropertieslist.data;
 
 import com.challenge.zap.zappropertieslist.data.model.Property;
+import com.challenge.zap.zappropertieslist.data.model.PropertyDetail;
 
 import java.util.List;
 
@@ -14,4 +15,10 @@ public interface DataRepository {
     }
 
     void getPropertiesList(getListOnFinishedListener listener);
+
+    interface getDetailOnFinishedListener {
+        void onFinishedDetail(PropertyDetail property);
+    }
+
+    void getDetailProperty(getDetailOnFinishedListener listener, int codProperty);
 }

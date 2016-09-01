@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Property {
 
-    public int CodImovel;
+    @SerializedName("CodImovel")
+    public int codeProperty;
     @SerializedName("TipoImovel")
     public String propertyType;
     @SerializedName("AreaTotal")
@@ -23,8 +24,8 @@ public class Property {
     @SerializedName("Endereco")
     public Address address;
 
-    public Property(int codImovel, String propertyType, String area, int dormitory, int parking, String urlImage, int price, Address address) {
-        CodImovel = codImovel;
+    public Property(int codeProperty, String propertyType, String area, int dormitory, int parking, String urlImage, int price, Address address) {
+        this.codeProperty = codeProperty;
         this.propertyType = propertyType;
         this.area = area;
         this.dormitory = dormitory;
@@ -34,12 +35,12 @@ public class Property {
         this.address = address;
     }
 
-    public int getCodImovel() {
-        return CodImovel;
+    public int getCodeProperty() {
+        return codeProperty;
     }
 
-    public void setCodImovel(int codImovel) {
-        CodImovel = codImovel;
+    public void setCodeProperty(int codeProperty) {
+        this.codeProperty = codeProperty;
     }
 
     public String getPropertyType() {
@@ -82,7 +83,7 @@ public class Property {
         this.urlImage = urlImage;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -101,7 +102,7 @@ public class Property {
     @Override
     public String toString() {
         return "Property = " +
-                CodImovel + "," +
+                codeProperty + "," +
                 propertyType + "," +
                 area + "," +
                 dormitory + "," +
