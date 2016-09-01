@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">Zap Properties List</string>
+    <string name="app_name">Lista de Imóveis Zap</string>
     <string name="no_item">Não foi possível realizar o download dos itens</string>
     <string name="network_msg">Sem Conexão com a internet. Estabeleça uma conexão e tente
         novamente </string>
+    <string name="message_success">Mensagem enviada com sucesso</string>
+    <string name="message_fail">Não foi possível enviar a mensagem</string>
 
     <!-- MainActivity-->
     <string name="neighbor_city">%1$s - %2$s</string>
@@ -26,7 +28,7 @@
     <string name="info">Informações Complementares</string>
     <string name="ads">Anunciante</string>
 
-    <string name="send">entrar em contato</string>
+    <string name="send">Entrar em contato com o anunciante</string>
 
 
 </resources>

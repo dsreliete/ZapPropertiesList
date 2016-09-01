@@ -2,12 +2,13 @@ package com.challenge.zap.zappropertieslist.propertyDetail;
 
 import com.challenge.zap.zappropertieslist.data.DataRepository;
 import com.challenge.zap.zappropertieslist.data.model.PropertyDetail;
+import com.challenge.zap.zappropertieslist.data.model.ZapMessage;
 
 /**
  * Created by eliete on 8/31/16.
  */
 public class PropertyDetailPresenter implements PropertyDetailContract.UserActionListener,
-        DataRepository.getDetailOnFinishedListener {
+        DataRepository.getDetailOnFinishedListener, DataRepository.getSentMessageOnFinishedListener {
 
     PropertyDetailContract.View propertyContract;
     DataRepository dataRepository;
@@ -23,6 +24,13 @@ public class PropertyDetailPresenter implements PropertyDetailContract.UserActio
         if (propertyContract != null)
             propertyContract.showProgress();
         dataRepository.getDetailProperty(this, codeProperty);
+    }
+
+    @Override
+    public void sendMessage(ZapMessage message) {
+        if (propertyContract != null)
+            propertyContract.showProgress();
+        dataRepository.sendMessage(this, message);
     }
 
     @Override
@@ -71,5 +79,11 @@ public class PropertyDetailPresenter implements PropertyDetailContract.UserActio
             propertyContract.showNoDetail();
         }
 
+    }
+
+    @Override
+    public void onFinishedSendMessage(boolean condition) {
+        propertyContract.hideProgress();
+        propertyContract.showSnackBar(condition);
     }
 }

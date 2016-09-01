@@ -2,9 +2,12 @@ package com.challenge.zap.zappropertieslist.data.webservice;
 
 import com.challenge.zap.zappropertieslist.data.model.Model;
 import com.challenge.zap.zappropertieslist.data.model.ModelDetail;
+import com.challenge.zap.zappropertieslist.data.model.ZapMessage;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -17,5 +20,8 @@ public interface ZapImoveisApi {
 
     @GET("/imoveis/{code}")
     Call<ModelDetail> getPropertyDetail(@Path("code") int code);
+
+    @POST("/imoveis/contato")
+    Call<ZapMessage> sendMessage(@Body ZapMessage zapMessage);
 
 }

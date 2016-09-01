@@ -10,6 +10,17 @@ public class Client {
     @SerializedName("NomeFantasia")
     public String name;
 
+    @SerializedName("CodCliente")
+    public int clientId;
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
     public String getName() {
         return name;
     }
@@ -22,6 +33,7 @@ public class Client {
     public String toString() {
         return "Client{" +
                 "name='" + name + '\'' +
+                ", clientId=" + clientId +
                 '}';
     }
 }

@@ -1,12 +1,12 @@
 package com.challenge.zap.zappropertieslist.data;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.challenge.zap.zappropertieslist.data.model.Model;
 import com.challenge.zap.zappropertieslist.data.model.ModelDetail;
 import com.challenge.zap.zappropertieslist.data.model.Property;
 import com.challenge.zap.zappropertieslist.data.model.PropertyDetail;
+import com.challenge.zap.zappropertieslist.data.model.ZapMessage;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApi;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApiManager;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApiManagerImpl;
@@ -33,7 +33,6 @@ public class DataRepositoryImpl implements DataRepository {
         zapImoveisApi.getPropertyList().enqueue(new Callback<Model>() {
             @Override
             public void onResponse(Call<Model> call, Response<Model> response) {
-                Log.e("eliete", "response.raw() "+ response.raw());
                 if (response.isSuccessful()){
                     if (response.code() == 200){
                         propertyList = response.body().propertyList;
@@ -68,13 +67,9 @@ public class DataRepositoryImpl implements DataRepository {
         zapImoveisApi.getPropertyDetail(codProperty).enqueue(new Callback<ModelDetail>() {
             @Override
             public void onResponse(Call<ModelDetail> call, Response<ModelDetail> response) {
-                Log.e("eliete", "response.raw() " + response.raw());
                 if (response.isSuccessful()){
-                    if (response.code() == 200) {
-                        property = response.body();
-                        Log.e("eliete", "response.body " + response.body());
-                        returnPropertyDetail(property, listener);
-                    }
+                    property = response.body();
+                    returnPropertyDetail(property, listener);
                 }else{
                     returnPropertyDetail(property, listener);
                 }
@@ -99,6 +94,34 @@ public class DataRepositoryImpl implements DataRepository {
 
                 }
                 listener.onFinishedDetail(propertyDetail);
+            }
+        });
+    }
+
+    @Override
+    public void sendMessage(final getSentMessageOnFinishedListener listener, ZapMessage message) {
+        zapImoveisApi.sendMessage(message).enqueue(new Callback<ZapMessage>() {
+            @Override
+            public void onResponse(Call<ZapMessage> call, Response<ZapMessage> response) {
+                if (response.isSuccessful()){
+                    returnSendMessage(listener, true);
+                }else{
+                    returnSendMessage(listener, false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ZapMessage> call, Throwable t) {
+                returnSendMessage(listener, false);
+            }
+        });
+    }
+
+    public void returnSendMessage(final getSentMessageOnFinishedListener listener, final boolean success) {
+        handler = new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                listener.onFinishedSendMessage(success);
             }
         });
     }

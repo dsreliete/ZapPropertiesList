@@ -2,6 +2,7 @@ package com.challenge.zap.zappropertieslist.propertyDetail;
 
 import com.challenge.zap.zappropertieslist.data.model.Address;
 import com.challenge.zap.zappropertieslist.data.model.Client;
+import com.challenge.zap.zappropertieslist.data.model.ZapMessage;
 
 import java.util.List;
 
@@ -36,11 +37,15 @@ public class PropertyDetailContract {
 
         void showDetailContainer(boolean condition);
 
+        void showSnackBar(boolean condition);
+
     }
 
     interface UserActionListener{
 
         void fetchPropertyDetail(int codeProperty);
+
+        void sendMessage(ZapMessage message);
 
     }
 }

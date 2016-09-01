@@ -1,23 +1,27 @@
 package com.challenge.zap.zappropertieslist.propertyDetail;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.challenge.zap.zappropertieslist.R;
 import com.challenge.zap.zappropertieslist.Utils;
 import com.challenge.zap.zappropertieslist.data.DataRepositoryImpl;
 import com.challenge.zap.zappropertieslist.data.model.Address;
 import com.challenge.zap.zappropertieslist.data.model.Client;
+import com.challenge.zap.zappropertieslist.data.model.ZapMessage;
 import com.challenge.zap.zappropertieslist.property.MainActivity;
+import com.challenge.zap.zappropertieslist.propertyAdd.AddPropertyDialogFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,9 +33,11 @@ import butterknife.OnClick;
 /**
  * Created by eliete on 8/30/16.
  */
-public class PropertyDetailActivity extends AppCompatActivity implements PropertyDetailContract.View {
+public class PropertyDetailActivity extends AppCompatActivity implements
+        PropertyDetailContract.View, AddPropertyDialogFragment.SendMessage {
 
     public static final String TAG = PropertyDetailActivity.class.getSimpleName();
+    public static final String EXTRA_FRAGMENT = "AddProperty";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -44,7 +50,7 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
     @BindView(R.id.cardview)
     CardView cardView;
     @BindView(R.id.send)
-    Button sendButton;
+    FloatingActionButton sendButton;
 
     @BindView(R.id.money_image)
     ImageView moneyImageView;
@@ -104,6 +110,8 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
 
     private int propertyCode;
     private String urlImage;
+    private PropertyDetailContract.UserActionListener userActionListener;
+    private int clientId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,8 +128,7 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
 
         downloadImage(urlImage);
 
-        PropertyDetailContract.UserActionListener userActionListener =
-                new PropertyDetailPresenter(this, new DataRepositoryImpl());
+        userActionListener = new PropertyDetailPresenter(this, new DataRepositoryImpl());
         userActionListener.fetchPropertyDetail(propertyCode);
 
     }
@@ -134,7 +141,14 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
     }
 
     @OnClick(R.id.send) public void sendMessage(){
-        Toast.makeText(this, "dfdlfkds", Toast.LENGTH_SHORT).show();
+        FragmentManager fm = getSupportFragmentManager();
+        AddPropertyDialogFragment fragment = AddPropertyDialogFragment.newInstance(clientId);
+        fragment.show(fm, EXTRA_FRAGMENT);
+    }
+
+    @Override
+    public void broadcastMessage(ZapMessage message) {
+        userActionListener.sendMessage(message);
     }
 
     @Override
@@ -159,12 +173,28 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
     }
 
     @Override
-    public void showClientInformation(Client client) {
-        adsTextView.setVisibility(View.VISIBLE);
-        adsTextView.setText(client.getName());
+    public void showSnackBar(boolean condition) {
+        String message;
+        message = condition ? getResources().getString(R.string.message_success)
+                : getResources().getString(R.string.message_success);
+        Snackbar.make(this.findViewById(android.R.id.content), message,
+                Snackbar.LENGTH_SHORT)
+                .setActionTextColor(Color.WHITE)
+                .show();
+    }
 
-        adsImageView.setVisibility(View.VISIBLE);
-        advertTextView.setVisibility(View.VISIBLE);
+    @Override
+    public void showClientInformation(Client client) {
+
+        if (client != null) {
+            clientId = client.getClientId();
+
+            adsTextView.setVisibility(View.VISIBLE);
+            adsTextView.setText(client.getName());
+
+            adsImageView.setVisibility(View.VISIBLE);
+            advertTextView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
