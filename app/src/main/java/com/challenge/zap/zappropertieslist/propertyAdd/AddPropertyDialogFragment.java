@@ -87,12 +87,12 @@ public class AddPropertyDialogFragment extends android.support.v4.app.DialogFrag
         String email = emailEditText.getText().toString();
         String phone = phoneEditText.getText().toString();
 
-        if (name.isEmpty() || email.isEmpty() || phone.isEmpty()){
+        if (name.isEmpty()){
             Utils.setEmptyMessage(nameTextInput, "nome");
         }else if (email.isEmpty()){
-            Utils.setEmptyMessage(nameTextInput, "e-mail");
+            Utils.setEmptyMessage(emailTextInput, "e-mail");
         }else if (phone.isEmpty()) {
-            Utils.setEmptyMessage(nameTextInput, "telefone");
+            Utils.setEmptyMessage(phoneTextInput, "telefone");
         }else{
             SendMessage listener = (SendMessage) getActivity();
             ZapMessage zapMessage = new ZapMessage(name, email, phone, codeAds);
