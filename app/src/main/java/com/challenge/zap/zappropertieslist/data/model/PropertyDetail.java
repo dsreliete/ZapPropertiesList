@@ -27,8 +27,6 @@ public class PropertyDetail {
     public Address address;
     @SerializedName("Suites")
     public int suites;
-    @SerializedName("DataAtualizacao")
-    public String date;
     @SerializedName("Cliente")
     public Client cliente;
     @SerializedName("CaracteristicasComum")
@@ -112,14 +110,6 @@ public class PropertyDetail {
         this.suites = suites;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public Client getCliente() {
         return cliente;
     }
@@ -172,7 +162,6 @@ public class PropertyDetail {
                 ", price=" + price +
                 ", address=" + address +
                 ", suites=" + suites +
-                ", date='" + date + '\'' +
                 ", cliente=" + cliente +
                 ", characteristicsList=" + characteristicsList +
                 ", iptu=" + iptu +

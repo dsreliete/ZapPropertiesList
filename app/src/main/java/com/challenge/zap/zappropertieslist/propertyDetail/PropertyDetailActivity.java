@@ -3,11 +3,14 @@ package com.challenge.zap.zappropertieslist.propertyDetail;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.challenge.zap.zappropertieslist.R;
 import com.challenge.zap.zappropertieslist.Utils;
@@ -21,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by eliete on 8/30/16.
@@ -37,6 +41,10 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
     TextView noDetailTextView;
     @BindView(R.id.backdrop)
     ImageView backdropImageView;
+    @BindView(R.id.cardview)
+    CardView cardView;
+    @BindView(R.id.send)
+    Button sendButton;
 
     @BindView(R.id.money_image)
     ImageView moneyImageView;
@@ -94,13 +102,6 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
     @BindView(R.id.ads_text)
     TextView adsTextView;
 
-    @BindView(R.id.date_image)
-    ImageView dateImageView;
-    @BindView(R.id.date)
-    TextView dtTextView;
-    @BindView(R.id.date_text)
-    TextView dateTextView;
-
     private int propertyCode;
     private String urlImage;
 
@@ -132,6 +133,10 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
                 .into(backdropImageView);
     }
 
+    @OnClick(R.id.send) public void sendMessage(){
+        Toast.makeText(this, "dfdlfkds", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
@@ -143,12 +148,14 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
     }
 
     @Override
-    public void showDateContainer(String date) {
-        dateTextView.setVisibility(View.VISIBLE);
-        dateTextView.setText(date);
-
-        dateImageView.setVisibility(View.VISIBLE);
-        dtTextView.setVisibility(View.VISIBLE);
+    public void showDetailContainer(boolean condition) {
+        if (condition) {
+            cardView.setVisibility(View.VISIBLE);
+            sendButton.setVisibility(View.VISIBLE);
+        }else {
+            cardView.setVisibility(View.GONE);
+            sendButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -233,9 +240,13 @@ public class PropertyDetailActivity extends AppCompatActivity implements Propert
 
     @Override
     public void showCharacteristics(List<String> list) {
-        String charac = null;
+        String charac = "";
         for(int i = 0; i < list.size(); i++){
-            charac += list.get(i) + " , ";
+            if ((i == 0 && list.size() == 1) || i == list.size() - 1){
+                charac += list.get(i);
+            }else {
+                charac += list.get(i) + " , ";
+            }
         }
         characterTextView.setVisibility(View.VISIBLE);
         characterTextView.setText(charac);

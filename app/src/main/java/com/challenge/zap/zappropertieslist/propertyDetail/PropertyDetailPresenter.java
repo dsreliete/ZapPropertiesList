@@ -30,63 +30,44 @@ public class PropertyDetailPresenter implements PropertyDetailContract.UserActio
         propertyContract.hideProgress();
         if (property != null){
 
-            if (property.getDate() != null){
-                propertyContract.showDateContainer(property.getDate());
-            }else{
-                propertyContract.showNoDetail();
-            }
+            propertyContract.showDetailContainer(true);
 
-            if (property.getCharacteristicsList() != null){
+            if (property.getCharacteristicsList().size() > 0){
                 propertyContract.showCharacteristics(property.getCharacteristicsList());
-            }else{
-                propertyContract.showNoDetail();
             }
 
             if (property.getCliente() != null){
                 propertyContract.showClientInformation(property.getCliente());
-            }else{
-                propertyContract.showNoDetail();
             }
 
             if (property.getCondominiumPrice() > 0 ){
                 propertyContract.showCondominiumValue(property.getCondominiumPrice() );
-            }else{
-                propertyContract.showNoDetail();
             }
 
             if (property.getIptu() > 0){
                 propertyContract.showIptuValue(property.getIptu());
-            }else{
-                propertyContract.showNoDetail();
             }
 
             if (property.getPrice() > 0){
                 propertyContract.showPrice(property.getPrice());
-            }else{
-                propertyContract.showNoDetail();
             }
 
             if (property.getAddress() != null){
                 propertyContract.showAddress(property.getAddress());
-            }else{
-                propertyContract.showNoDetail();
             }
 
-            if (property.getArea() > 0 || property.getDormitory() > 0 || property.getParking() > 0
-                    || property.getSuites() > 0){
+            if (property.getArea() >= 0 || property.getDormitory() >= 0 || property.getParking() >= 0
+                    || property.getSuites() >= 0){
                 propertyContract.showDetailProperty(property.getArea(), property.getDormitory(),
                         property.getParking(), property.getSuites());
-            }else{
-                propertyContract.showNoDetail();
             }
 
             if (property.getInformation() != null){
                 propertyContract.showInformation(property.getInformation());
-            }else{
-                propertyContract.showNoDetail();
             }
 
         }else{
+            propertyContract.showDetailContainer(false);
             propertyContract.showNoDetail();
         }
 

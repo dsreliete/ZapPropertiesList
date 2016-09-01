@@ -18,8 +18,6 @@ public class PropertyDetailContract {
 
         void showNoDetail();
 
-        void showDateContainer(String date);
-
         void showClientInformation(Client client);
 
         void showCondominiumValue(int value);
@@ -35,6 +33,8 @@ public class PropertyDetailContract {
         void showInformation(String info);
 
         void showCharacteristics(List<String> list);
+
+        void showDetailContainer(boolean condition);
 
     }
 

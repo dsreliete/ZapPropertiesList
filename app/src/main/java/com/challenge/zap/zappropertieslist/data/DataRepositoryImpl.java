@@ -35,14 +35,18 @@ public class DataRepositoryImpl implements DataRepository {
             public void onResponse(Call<Model> call, Response<Model> response) {
                 Log.e("eliete", "response.raw() "+ response.raw());
                 if (response.isSuccessful()){
-                   propertyList = response.body().propertyList;
-                    returnPropertyList(propertyList, listener);
+                    if (response.code() == 200){
+                        propertyList = response.body().propertyList;
+                        returnPropertyList(propertyList, listener);
+                    }else{
+                        returnPropertyList(propertyList, listener);
+                    }
+
                 }
             }
 
             @Override
             public void onFailure(Call<Model> call, Throwable t) {
-                propertyList = null;
                 returnPropertyList(propertyList, listener);
             }
         });
@@ -54,7 +58,6 @@ public class DataRepositoryImpl implements DataRepository {
         handler = new Handler().post(new Runnable() {
             @Override
             public void run() {
-                Log.e("eliete", "list =  "+ list);
                 listener.onFinishedList(list);
             }
         });
@@ -67,15 +70,18 @@ public class DataRepositoryImpl implements DataRepository {
             public void onResponse(Call<ModelDetail> call, Response<ModelDetail> response) {
                 Log.e("eliete", "response.raw() " + response.raw());
                 if (response.isSuccessful()){
-                    property = response.body();
-                    Log.e("eliete", "response.body " + response.body());
+                    if (response.code() == 200) {
+                        property = response.body();
+                        Log.e("eliete", "response.body " + response.body());
+                        returnPropertyDetail(property, listener);
+                    }
+                }else{
                     returnPropertyDetail(property, listener);
                 }
             }
 
             @Override
             public void onFailure(Call<ModelDetail> call, Throwable t) {
-                property = null;
                 returnPropertyDetail(property, listener);
             }
         });
@@ -87,10 +93,10 @@ public class DataRepositoryImpl implements DataRepository {
             @Override
             public void run() {
                 PropertyDetail propertyDetail = null;
-                if (modelProperty.getProperty() != null){
-                    if (modelProperty.getProperty() != null){
+                if (modelProperty != null){
+                    if (modelProperty.getProperty() != null)
                         propertyDetail = modelProperty.getProperty();
-                    }
+
                 }
                 listener.onFinishedDetail(propertyDetail);
             }
