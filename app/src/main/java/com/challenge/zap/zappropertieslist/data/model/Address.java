@@ -17,11 +17,20 @@ public class Address implements Serializable {
     public String city;
     @SerializedName("Bairro")
     public String neighborhood;
-    @SerializedName("Zona")
-    public String zone;
     @SerializedName("Complemento")
     public String complement;
 
+    public Address() {
+
+    }
+
+    public Address(String street, String number, String city, String neighborhood, String complement) {
+        this.street = street;
+        this.number = number;
+        this.city = city;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+    }
 
     public String getStreet() {
         return street;
@@ -55,14 +64,6 @@ public class Address implements Serializable {
         this.neighborhood = neighborhood;
     }
 
-    public String getZone() {
-        return zone;
-    }
-
-    public void setZone(String zone) {
-        this.zone = zone;
-    }
-
     public String getComplement() {
         return complement;
     }
@@ -78,7 +79,6 @@ public class Address implements Serializable {
                 ", number='" + number + '\'' +
                 ", city='" + city + '\'' +
                 ", neighborhood='" + neighborhood + '\'' +
-                ", zone='" + zone + '\'' +
                 ", complement='" + complement + '\'' +
                 '}';
     }

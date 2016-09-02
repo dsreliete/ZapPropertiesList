@@ -23,6 +23,8 @@ public interface MainContract {
 
         void showNoProperty();
 
+        void showSortedList(List<Property> propertyList);
+
     }
 
     interface UserActionListener{
@@ -30,6 +32,8 @@ public interface MainContract {
         void fetchPropertyList();
 
         void openItemDetails(@NonNull Property requestedProperty);
+
+        void sort(List<Property> list, FilterPropertyDialogFragment.RadioEnun radioEnun);
 
     }
 }

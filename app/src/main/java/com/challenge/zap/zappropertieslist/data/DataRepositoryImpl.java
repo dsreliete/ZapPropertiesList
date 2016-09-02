@@ -10,7 +10,9 @@ import com.challenge.zap.zappropertieslist.data.model.ZapMessage;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApi;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApiManager;
 import com.challenge.zap.zappropertieslist.data.webservice.ZapImoveisApiManagerImpl;
+import com.challenge.zap.zappropertieslist.property.FilterPropertyDialogFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -91,7 +93,6 @@ public class DataRepositoryImpl implements DataRepository {
                 if (modelProperty != null){
                     if (modelProperty.getProperty() != null)
                         propertyDetail = modelProperty.getProperty();
-
                 }
                 listener.onFinishedDetail(propertyDetail);
             }
@@ -125,4 +126,57 @@ public class DataRepositoryImpl implements DataRepository {
             }
         });
     }
+
+    @Override
+    public void sortList(getSortedListOnFinishedListener listener, List<Property> propertyList,
+                         FilterPropertyDialogFragment.RadioEnun radioEnun) {
+        List<Property> list = sort(propertyList, radioEnun);
+        listener.onFinishedSort(list);
+
+    }
+
+    public static boolean smaller(Property prop, Property propAux,
+                                  FilterPropertyDialogFragment.RadioEnun radioEnun) {
+
+        if (radioEnun == FilterPropertyDialogFragment.RadioEnun.PRICE)
+            return prop.getPrice() <= propAux.getPrice();
+        if (radioEnun == FilterPropertyDialogFragment.RadioEnun.PARKING)
+            return prop.getParking() <= propAux.getParking();
+        if (radioEnun == FilterPropertyDialogFragment.RadioEnun.DORMITORY)
+            return prop.getDormitory() <= propAux.getDormitory();
+        return false;
+
+    }
+
+    public static List<Property> sort(List<Property> list,
+                                      FilterPropertyDialogFragment.RadioEnun radioEnun) {
+
+        List<Property> listAux = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (i == 0)
+                listAux.add(list.get(i));
+            else {
+                if (i == 1) {
+                    if (smaller(list.get(i), listAux.get(0), radioEnun))
+                        listAux.add(0, list.get(i));
+                    else
+                        listAux.add(list.get(i));
+                } else {
+                    for (int j = 0; j < listAux.size(); j++) {
+                        if (smaller(list.get(i), listAux.get(j), radioEnun)) {
+                            listAux.add(j, list.get(i));
+                            j = listAux.size();
+                        } else {
+                            if (j == listAux.size() - 1) {
+                                listAux.add(list.get(i));
+                                j = listAux.size();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return listAux;
+    }
+
 }

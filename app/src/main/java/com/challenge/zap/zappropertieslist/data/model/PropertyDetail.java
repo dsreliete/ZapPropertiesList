@@ -19,8 +19,6 @@ public class PropertyDetail {
     public int dormitory;
     @SerializedName("Vagas")
     public int parking;
-    @SerializedName("Fotos")
-    public List<String> urlImageList;
     @SerializedName("PrecoVenda")
     public int price;
     @SerializedName("Endereco")
@@ -28,7 +26,7 @@ public class PropertyDetail {
     @SerializedName("Suites")
     public int suites;
     @SerializedName("Cliente")
-    public Client cliente;
+    public Client client;
     @SerializedName("CaracteristicasComum")
     public List<String> characteristicsList;
     @SerializedName("ValorIPTU")
@@ -36,118 +34,98 @@ public class PropertyDetail {
     @SerializedName("PrecoCondominio")
     public int condominiumPrice;
     @SerializedName("Observacao")
+    public String observation;
+    @SerializedName("SubTipoOferta")
+    public String offer;
+    @SerializedName("InformacoesComplementares")
     public String information;
+    @SerializedName("DataAtualizacao")
+    public String date;
+
+    public PropertyDetail(int codeProperty, String propertyType, int area, int dormitory, int parking,
+                          int price, Address address, int suites, Client client,
+                          List<String> characteristicsList, int iptu, int condominiumPrice,
+                          String observation, String offer, String information, String date) {
+        this.codeProperty = codeProperty;
+        this.propertyType = propertyType;
+        this.area = area;
+        this.dormitory = dormitory;
+        this.parking = parking;
+        this.price = price;
+        this.address = address;
+        this.suites = suites;
+        this.client = client;
+        this.characteristicsList = characteristicsList;
+        this.iptu = iptu;
+        this.condominiumPrice = condominiumPrice;
+        this.observation = observation;
+        this.offer = offer;
+        this.information = information;
+        this.date = date;
+    }
 
     public int getCodeProperty() {
         return codeProperty;
-    }
-
-    public void setCodeProperty(int codeProperty) {
-        this.codeProperty = codeProperty;
     }
 
     public String getPropertyType() {
         return propertyType;
     }
 
-    public void setPropertyType(String propertyType) {
-        this.propertyType = propertyType;
-    }
-
     public int getArea() {
         return area;
-    }
-
-    public void setArea(int area) {
-        this.area = area;
     }
 
     public int getDormitory() {
         return dormitory;
     }
 
-    public void setDormitory(int dormitory) {
-        this.dormitory = dormitory;
-    }
-
     public int getParking() {
         return parking;
-    }
-
-    public void setParking(int parking) {
-        this.parking = parking;
-    }
-
-    public List<String> getUrlImageList() {
-        return urlImageList;
-    }
-
-    public void setUrlImageList(List<String> urlImageList) {
-        this.urlImageList = urlImageList;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public Address getAddress() {
         return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public int getSuites() {
         return suites;
     }
 
-    public void setSuites(int suites) {
-        this.suites = suites;
-    }
-
-    public Client getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Client cliente) {
-        this.cliente = cliente;
+    public Client getClient() {
+        return client;
     }
 
     public List<String> getCharacteristicsList() {
         return characteristicsList;
     }
 
-    public void setCharacteristicsList(List<String> characteristicsList) {
-        this.characteristicsList = characteristicsList;
-    }
-
     public int getIptu() {
         return iptu;
-    }
-
-    public void setIptu(int iptu) {
-        this.iptu = iptu;
     }
 
     public int getCondominiumPrice() {
         return condominiumPrice;
     }
 
-    public void setCondominiumPrice(int condominiumPrice) {
-        this.condominiumPrice = condominiumPrice;
+    public String getObservation() {
+        return observation;
+    }
+
+    public String getOffer() {
+        return offer;
     }
 
     public String getInformation() {
         return information;
     }
 
-    public void setInformation(String information) {
-        this.information = information;
+    public String getDate() {
+        return date;
     }
 
     @Override
@@ -155,18 +133,20 @@ public class PropertyDetail {
         return "PropertyDetail{" +
                 "codeProperty=" + codeProperty +
                 ", propertyType='" + propertyType + '\'' +
-                ", area='" + area + '\'' +
+                ", area=" + area +
                 ", dormitory=" + dormitory +
                 ", parking=" + parking +
-                ", urlImage='" + urlImageList + '\'' +
                 ", price=" + price +
                 ", address=" + address +
                 ", suites=" + suites +
-                ", cliente=" + cliente +
+                ", client=" + client +
                 ", characteristicsList=" + characteristicsList +
                 ", iptu=" + iptu +
                 ", condominiumPrice=" + condominiumPrice +
+                ", observation='" + observation + '\'' +
+                ", offer='" + offer + '\'' +
                 ", information='" + information + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }

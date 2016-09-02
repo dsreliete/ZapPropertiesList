@@ -44,8 +44,8 @@ public class PropertyDetailPresenter implements PropertyDetailContract.UserActio
                 propertyContract.showCharacteristics(property.getCharacteristicsList());
             }
 
-            if (property.getCliente() != null){
-                propertyContract.showClientInformation(property.getCliente());
+            if (property.getClient() != null){
+                propertyContract.showClientInformation(property.getClient());
             }
 
             if (property.getCondominiumPrice() > 0 ){
@@ -70,8 +70,20 @@ public class PropertyDetailPresenter implements PropertyDetailContract.UserActio
                         property.getParking(), property.getSuites());
             }
 
-            if (property.getInformation() != null){
+            if (property.getObservation() != null){
+                propertyContract.showObservation(property.getObservation());
+            }
+
+            if (property.getDate() != null){
+                propertyContract.showDate(property.getDate());
+            }
+
+            if (!property.getInformation().isEmpty()){
                 propertyContract.showInformation(property.getInformation());
+            }
+
+            if (property.getOffer() != null){
+                propertyContract.showSale(property.getOffer());
             }
 
         }else{

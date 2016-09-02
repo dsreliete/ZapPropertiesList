@@ -44,11 +44,16 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     public void onBindViewHolder(PropertyAdapter.ViewHolder holder, int position) {
         Property property = getItem(position);
         if (property != null){
-            holder.areatTextView.setText(context.getResources().getString(R.string.area, property.area));
-            holder.typeTextView.setText(property.propertyType);
+            holder.spaceTextView.setText(context.getResources().getString(R.string.area, property.area));
+            holder.categoryTextView.setText(property.propertyType);
             holder.addressTextView.setText(context.getResources().getString(R.string.neighbor_city,
                     property.address.neighborhood, property.address.city));
             holder.priceTextView.setText(Utils.moneyMask(property.price, Utils.MONEY));
+            holder.spaceTextView.setText(context.getResources().getString(R.string.area, property.area));
+            holder.flatTextView.setText(context.getResources().getString(R.string.suite, property.suite));
+            holder.lotTextView.setText(context.getResources().getString(R.string.park, property.parking));
+            holder.bedroomTextView.setText(context.getResources().getString(R.string.dorm, property.dormitory));
+            holder.offerTextView.setText(context.getResources().getString(R.string.offer, property.sale));
 
             Picasso.with(context)
                     .load(property.urlImage)
@@ -71,14 +76,22 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
         @BindView(R.id.prop_image)
         ImageView propertyImageView;
-        @BindView(R.id.area_text)
-        TextView areatTextView;
-        @BindView(R.id.type_text)
-        TextView typeTextView;
-        @BindView(R.id.address_text)
+        @BindView(R.id.category_text)
+        TextView categoryTextView;
+        @BindView(R.id.location_text)
         TextView addressTextView;
-        @BindView(R.id.price_text)
+        @BindView(R.id.amount_text)
         TextView priceTextView;
+        @BindView(R.id.space_text)
+        TextView spaceTextView;
+        @BindView(R.id.bedroom_text)
+        TextView bedroomTextView;
+        @BindView(R.id.lot_text)
+        TextView lotTextView;
+        @BindView(R.id.flat_text)
+        TextView flatTextView;
+        @BindView(R.id.offer_text)
+        TextView offerTextView;
 
         private MainActivity.PropertyTouchListener touchListener;
 

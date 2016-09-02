@@ -12,56 +12,95 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/offer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:text="Oferta:"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
         <ImageView
             android:id="@+id/prop_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="16dp"/>
+            android:layout_below="@+id/category_text"
+            android:layout_alignBottom="@+id/amount_text" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/type_text"
+                android:id="@+id/category_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextAppearance.AppCompat.Subhead"
+                style="@style/TextAppearance.AppCompat.Title"
                 android:text="Imóvel Tipo: "
                 android:layout_toRightOf="@id/prop_image"
                 android:layout_marginLeft="16dp"
-                android:paddingTop="12dp"/>
+                android:layout_alignParentTop="true"/>
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/area_text"
+                android:id="@+id/space_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.AppCompat.Caption"
-                android:padding="5dp"
                 android:layout_toRightOf="@id/prop_image"
-                android:layout_below="@id/type_text"
+                android:layout_below="@id/category_text"
                 android:text="Área Total:"
                 android:layout_marginLeft="16dp"/>
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/address_text"
+                android:id="@+id/bedroom_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_toRightOf="@id/prop_image"
-                android:layout_below="@id/area_text"
+                android:layout_below="@id/space_text"
+                android:text="Domitório:"
+                android:layout_marginLeft="16dp"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lot_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_toRightOf="@id/prop_image"
+                android:layout_below="@id/bedroom_text"
+                android:text="Vagas:"
+                android:layout_marginLeft="16dp"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/flat_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_toRightOf="@id/prop_image"
+                android:layout_below="@id/lot_text"
+                android:text="Suite:"
+                android:layout_marginLeft="16dp"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/prop_image"
+                android:layout_below="@id/flat_text"
                 style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_gravity="right"
                 android:text="Localização:"
                 android:layout_marginLeft="16dp"/>
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/price_text"
+                android:id="@+id/amount_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:layout_toRightOf="@id/prop_image"
-                android:layout_below="@id/address_text"
+                android:layout_below="@id/location_text"
                 style="@style/TextAppearance.AppCompat.Body2"
                 tools:text="Preço:"
                 android:layout_marginLeft="16dp"/>

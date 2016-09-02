@@ -23,6 +23,11 @@ public class Property {
     public int price;
     @SerializedName("Endereco")
     public Address address;
+    @SerializedName("Suites")
+    public String suite;
+    @SerializedName("SubTipoOferta")
+    public String sale;
+
 
     public Property(int codeProperty, String propertyType, String area, int dormitory, int parking, String urlImage, int price, Address address) {
         this.codeProperty = codeProperty;
@@ -39,76 +44,55 @@ public class Property {
         return codeProperty;
     }
 
-    public void setCodeProperty(int codeProperty) {
-        this.codeProperty = codeProperty;
-    }
-
     public String getPropertyType() {
         return propertyType;
-    }
-
-    public void setPropertyType(String propertyType) {
-        this.propertyType = propertyType;
     }
 
     public String getArea() {
         return area;
     }
 
-    public void setArea(String area) {
-        this.area = area;
-    }
-
     public int getDormitory() {
         return dormitory;
-    }
-
-    public void setDormitory(int dormitory) {
-        this.dormitory = dormitory;
     }
 
     public int getParking() {
         return parking;
     }
 
-    public void setParking(int parking) {
-        this.parking = parking;
-    }
-
     public String getUrlImage() {
         return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public String getSuite() {
+        return suite;
+    }
+
+    public String getSale() {
+        return sale;
     }
 
     @Override
     public String toString() {
-        return "Property = " +
-                codeProperty + "," +
-                propertyType + "," +
-                area + "," +
-                dormitory + "," +
-                parking + "," +
-                urlImage + "," +
-                price + "," +
-                address;
+        return "Property{" +
+                "codeProperty=" + codeProperty +
+                ", propertyType='" + propertyType + '\'' +
+                ", area='" + area + '\'' +
+                ", dormitory=" + dormitory +
+                ", parking=" + parking +
+                ", urlImage='" + urlImage + '\'' +
+                ", price=" + price +
+                ", address=" + address +
+                ", suite='" + suite + '\'' +
+                ", sale='" + sale + '\'' +
+                '}';
     }
 }

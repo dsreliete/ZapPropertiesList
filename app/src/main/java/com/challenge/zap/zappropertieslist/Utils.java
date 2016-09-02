@@ -7,6 +7,8 @@ import android.widget.EditText;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -49,7 +51,11 @@ public class Utils {
         textInputLayout.setError(errorMessage + " é obrigatório");
     }
 
-    public static void setTextMessage(TextInputLayout textInputLayout, String errorMessage){
-        textInputLayout.setError(errorMessage + " deve conter apenas letras");
+    public static String formatDate(String dtUpdate){
+        String tempDate = dtUpdate.replaceAll("\\D+", "");
+        Date date = new Date(Long.parseLong(tempDate));
+        String dateAsText = new SimpleDateFormat("dd/MM/yyyy")
+                .format(date);
+        return dateAsText;
     }
 }

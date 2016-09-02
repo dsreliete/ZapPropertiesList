@@ -11,7 +11,7 @@ import java.util.List;
  * Created by eliete on 7/25/16.
  */
 public class MainPresenter implements MainContract.UserActionListener,
-        DataRepository.getListOnFinishedListener {
+        DataRepository.getListOnFinishedListener, DataRepository.getSortedListOnFinishedListener {
 
     private MainContract.View mainContract;
     private DataRepository repository;
@@ -35,6 +35,14 @@ public class MainPresenter implements MainContract.UserActionListener,
     }
 
     @Override
+    public void sort(List<Property> list, FilterPropertyDialogFragment.RadioEnun radioEnun) {
+        if (mainContract != null) {
+            mainContract.showProgress();
+        }
+        repository.sortList(this, list, radioEnun);
+    }
+
+    @Override
     public void onFinishedList(List<Property> list) {
         if (list != null){
             mainContract.hideProgress();
@@ -45,4 +53,11 @@ public class MainPresenter implements MainContract.UserActionListener,
     }
 
 
+    @Override
+    public void onFinishedSort(List<Property> propertyList) {
+        mainContract.hideProgress();
+        if (propertyList != null){
+            mainContract.showSortedList(propertyList);
+        }
+    }
 }

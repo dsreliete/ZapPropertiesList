@@ -88,18 +88,18 @@ public class PropertyDetailActivity extends AppCompatActivity implements
     TextView areaTextView;
 
     @BindView(R.id.bookmark_image)
-    ImageView obsImageView;
+    ImageView characImageView;
     @BindView(R.id.characteristics)
-    TextView obsTextView;
+    TextView characTextView;
     @BindView(R.id.character_text)
     TextView characterTextView;
 
-    @BindView(R.id.info_image)
-    ImageView infoImageView;
-    @BindView(R.id.information)
-    TextView iTextView;
-    @BindView(R.id.info_text)
-    TextView infoTextView;
+    @BindView(R.id.obs_image)
+    ImageView obsImageView;
+    @BindView(R.id.observation)
+    TextView observationTextView;
+    @BindView(R.id.obs_text)
+    TextView obsTextView;
 
     @BindView(R.id.ads_image)
     ImageView adsImageView;
@@ -107,6 +107,27 @@ public class PropertyDetailActivity extends AppCompatActivity implements
     TextView advertTextView;
     @BindView(R.id.ads_text)
     TextView adsTextView;
+
+    @BindView(R.id.offer_image)
+    ImageView offerImageView;
+    @BindView(R.id.offer)
+    TextView offerTextView;
+    @BindView(R.id.offer_text)
+    TextView ofTextView;
+
+    @BindView(R.id.info_image)
+    ImageView infoImageView;
+    @BindView(R.id.info)
+    TextView infoTextView;
+    @BindView(R.id.info_text)
+    TextView iTextView;
+
+    @BindView(R.id.date_image)
+    ImageView dateImageView;
+    @BindView(R.id.date)
+    TextView dateTextView;
+    @BindView(R.id.date_text)
+    TextView dtTextView;
 
     private int propertyCode;
     private String urlImage;
@@ -185,7 +206,6 @@ public class PropertyDetailActivity extends AppCompatActivity implements
 
     @Override
     public void showClientInformation(Client client) {
-
         if (client != null) {
             clientId = client.getClientId();
 
@@ -201,8 +221,7 @@ public class PropertyDetailActivity extends AppCompatActivity implements
     public void showPrice(int price) {
         saleTextView.setVisibility(View.VISIBLE);
         saleTextView.setText(getResources().getString(R.string.sale_price, Utils.moneyMask(price,
-                                                                    Utils.MONEY)));
-
+                                                                            Utils.MONEY)));
         moneyImageView.setVisibility(View.VISIBLE);
         priceTextView.setVisibility(View.VISIBLE);
 
@@ -224,14 +243,13 @@ public class PropertyDetailActivity extends AppCompatActivity implements
 
     @Override
     public void showAddress(Address address) {
-
         locationImageView.setVisibility(View.VISIBLE);
         addressTextView.setVisibility(View.VISIBLE);
 
         streetNumberTextView.setVisibility(View.VISIBLE);
         streetNumberTextView.setText(getResources().getString(R.string.street_number,
                 address.getStreet() , address.getNumber()));
-        if (address.getComplement() != null){
+        if (!address.getComplement().isEmpty()){
             complementTextView.setVisibility(View.VISIBLE);
             complementTextView.setText(address.getComplement());
         }
@@ -259,12 +277,12 @@ public class PropertyDetailActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showInformation(String info) {
-        infoTextView.setVisibility(View.VISIBLE);
-        infoTextView.setText(info);
+    public void showObservation(String observ) {
+        obsTextView.setVisibility(View.VISIBLE);
+        obsTextView.setText(observ);
 
-        infoImageView.setVisibility(View.VISIBLE);
-        iTextView.setVisibility(View.VISIBLE);
+        obsImageView.setVisibility(View.VISIBLE);
+        observationTextView.setVisibility(View.VISIBLE);
     }
 
 
@@ -281,10 +299,38 @@ public class PropertyDetailActivity extends AppCompatActivity implements
         characterTextView.setVisibility(View.VISIBLE);
         characterTextView.setText(charac);
 
-        obsImageView.setVisibility(View.VISIBLE);
-        obsTextView.setVisibility(View.VISIBLE);
+        characImageView.setVisibility(View.VISIBLE);
+        characTextView.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void showDate(String date) {
+        dateImageView.setVisibility(View.VISIBLE);
+        dateTextView.setVisibility(View.VISIBLE);
+
+        dtTextView.setVisibility(View.VISIBLE);
+        dtTextView.setText(Utils.formatDate(date));
+    }
+
+    @Override
+    public void showInformation(String information) {
+
+        infoImageView.setVisibility(View.VISIBLE);
+        infoTextView.setVisibility(View.VISIBLE);
+
+        iTextView.setVisibility(View.VISIBLE);
+        iTextView.setText(information);
+    }
+
+    @Override
+    public void showSale(String offer) {
+        offerImageView.setVisibility(View.VISIBLE);
+        offerTextView.setVisibility(View.VISIBLE);
+
+        ofTextView.setVisibility(View.VISIBLE);
+        ofTextView.setText(offer);
+
+    }
 
     @Override
     public void showNoDetail() {
@@ -296,7 +342,6 @@ public class PropertyDetailActivity extends AppCompatActivity implements
         super.onSaveInstanceState(outState);
         outState.putInt(MainActivity.EXTRA_CODE, propertyCode);
         outState.putString(MainActivity.EXTRA_URL, urlImage);
-
     }
 
     @Override

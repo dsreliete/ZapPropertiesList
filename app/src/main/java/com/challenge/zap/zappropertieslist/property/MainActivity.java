@@ -6,6 +6,8 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,8 +26,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends InternetDetectionActivity implements MainContract.View{
+public class MainActivity extends InternetDetectionActivity implements MainContract.View,
+                                        FilterPropertyDialogFragment.FilterProperty{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String EXTRA_CODE = "codeProperty";
@@ -40,6 +44,8 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
     ProgressBar progressBar;
     @BindView(R.id.no_item)
     TextView noPropertyText;
+    @BindView(R.id.filter)
+    FloatingActionButton filterFAB;
 
     private MainContract.UserActionListener userActionListener;
     private List<Property> propertyList = new ArrayList<>();
@@ -65,11 +71,17 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
                     AlertDialogFragment.newInstance(getResources().getString(R.string.network_msg));
             alertDialogFragment.show(getSupportFragmentManager(), "alert");
         }
-        setupRecyclerView(lastVisiblePosition);
+        setupRecyclerView(lastVisiblePosition, propertyList);
 
     }
 
-    private void setupRecyclerView(int lastPosition) {
+    @OnClick(R.id.filter) public void filterProperties(){
+        FragmentManager fm = getSupportFragmentManager();
+        FilterPropertyDialogFragment fragment = FilterPropertyDialogFragment.newInstance();
+        fragment.show(fm, "filter");
+    }
+
+    private void setupRecyclerView(int lastPosition, List<Property> propertyList) {
         adapter = new PropertyAdapter(propertyList, repoTouchListener);
         recyclerView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
@@ -118,6 +130,11 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
     }
 
     @Override
+    public void showSortedList(List<Property> propertyList) {
+        setupRecyclerView(lastVisiblePosition, propertyList);
+    }
+
+    @Override
     public void showPropertyDetailActivity(Property property) {
         if (property != null) {
             Intent intent = new Intent(this, PropertyDetailActivity.class);
@@ -125,6 +142,11 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
             intent.putExtra(EXTRA_URL, property.getUrlImage());
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void filter(FilterPropertyDialogFragment.RadioEnun radioEnun) {
+        userActionListener.sort(propertyList, radioEnun);
     }
 
     public interface PropertyTouchListener {
@@ -156,9 +178,9 @@ public class MainActivity extends InternetDetectionActivity implements MainContr
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setupRecyclerView(layoutManager.findLastVisibleItemPosition());
+            setupRecyclerView(layoutManager.findLastVisibleItemPosition(), propertyList);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            setupRecyclerView(layoutManager.findLastVisibleItemPosition());
+            setupRecyclerView(layoutManager.findLastVisibleItemPosition(), propertyList);
         }
     }
 

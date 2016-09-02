@@ -1,34 +1,40 @@
 <resources>
-    <string name="app_name">Lista de Imóveis Zap</string>
+    <string name="app_name">Lista de Imóveis ZAP</string>
     <string name="no_item">Não foi possível realizar o download dos itens</string>
     <string name="network_msg">Sem Conexão com a internet. Estabeleça uma conexão e tente
         novamente </string>
-    <string name="message_success">Mensagem enviada com sucesso</string>
-    <string name="message_fail">Não foi possível enviar a mensagem</string>
 
     <!-- MainActivity-->
     <string name="neighbor_city">%1$s - %2$s</string>
     <string name="area">%1$s metros quadrado de área total</string>
+    <string name="filter">Ordenar por </string>
 
     <!-- PropertyDetailActivity-->
-    <string name="values">Valores</string>
+
     <string name="sale_price">Preço de venda: %1$s</string>
     <string name="cond_price">Preço do Condomínio: %1$s</string>
     <string name="iptu_price">Preço de IPTU: %1$s</string>
-
-    <string name="location">Localização</string>
+    <string name="offer">Oferta: %1$s</string>
     <string name="street_number">%1$s , %2$s</string>
-
-    <string name="detail">Detalhes</string>
     <string name="dorm">%1$s dormitório(s)</string>
     <string name="suite">%1$s suíte(s)</string>
     <string name="park">%1$s vaga(s)</string>
 
-    <string name="charac">Características</string>
-    <string name="info">Informações Complementares</string>
-    <string name="ads">Anunciante</string>
+    <string name="location_title">Localização</string>
+    <string name="values_title">Valores</string>
+    <string name="detail_title">Detalhes</string>
+    <string name="charac_title">Características</string>
+    <string name="info_title">Informações Complementares</string>
+    <string name="observation_title">Observação</string>
+    <string name="advertisement_title">Anunciante</string>
+    <string name="sale_title">Oferta</string>
+    <string name="date_title">Data da última Atualização</string>
+
+
 
     <string name="send">Mensagem ao anunciante</string>
+    <string name="message_success">Mensagem enviada com sucesso</string>
+    <string name="message_fail">Não foi possível enviar a mensagem</string>
 
 
 </resources>

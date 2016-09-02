@@ -31,7 +31,7 @@ public class PropertyDetailContract {
 
         void showDetailProperty(int area, int dorm, int park, int suite);
 
-        void showInformation(String info);
+        void showObservation(String info);
 
         void showCharacteristics(List<String> list);
 
@@ -39,6 +39,11 @@ public class PropertyDetailContract {
 
         void showSnackBar(boolean condition);
 
+        void showDate(String date);
+
+        void showInformation(String information);
+
+        void showSale(String offer);
     }
 
     interface UserActionListener{
