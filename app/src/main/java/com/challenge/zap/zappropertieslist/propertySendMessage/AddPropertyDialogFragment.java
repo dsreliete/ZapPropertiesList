@@ -1,4 +1,4 @@
-package com.challenge.zap.zappropertieslist.propertyAdd;
+package com.challenge.zap.zappropertieslist.propertySendMessage;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,7 +39,7 @@ public class AddPropertyDialogFragment extends android.support.v4.app.DialogFrag
     @BindView(R.id.send)
     Button sendButton;
 
-    private int codeAds;
+    private int codeProp;
 
     public static AddPropertyDialogFragment newInstance(int code){
         Bundle bundle = new Bundle();
@@ -53,7 +53,7 @@ public class AddPropertyDialogFragment extends android.support.v4.app.DialogFrag
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        codeAds = getArguments().getInt(PropertyDetailActivity.EXTRA_FRAGMENT);
+        codeProp = getArguments().getInt(PropertyDetailActivity.EXTRA_FRAGMENT);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class AddPropertyDialogFragment extends android.support.v4.app.DialogFrag
             Utils.setEmptyMessage(phoneTextInput, "telefone");
         }else{
             SendMessage listener = (SendMessage) getActivity();
-            ZapMessage zapMessage = new ZapMessage(name, email, phone, codeAds);
+            ZapMessage zapMessage = new ZapMessage(name, email, phone, codeProp);
             listener.broadcastMessage(zapMessage);
             dismiss();
         }

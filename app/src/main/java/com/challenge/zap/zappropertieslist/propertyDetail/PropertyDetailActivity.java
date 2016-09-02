@@ -21,7 +21,7 @@ import com.challenge.zap.zappropertieslist.data.model.Address;
 import com.challenge.zap.zappropertieslist.data.model.Client;
 import com.challenge.zap.zappropertieslist.data.model.ZapMessage;
 import com.challenge.zap.zappropertieslist.property.MainActivity;
-import com.challenge.zap.zappropertieslist.propertyAdd.AddPropertyDialogFragment;
+import com.challenge.zap.zappropertieslist.propertySendMessage.AddPropertyDialogFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -132,7 +132,6 @@ public class PropertyDetailActivity extends AppCompatActivity implements
     private int propertyCode;
     private String urlImage;
     private PropertyDetailContract.UserActionListener userActionListener;
-    private int clientId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,7 +162,7 @@ public class PropertyDetailActivity extends AppCompatActivity implements
 
     @OnClick(R.id.send) public void sendMessage(){
         FragmentManager fm = getSupportFragmentManager();
-        AddPropertyDialogFragment fragment = AddPropertyDialogFragment.newInstance(clientId);
+        AddPropertyDialogFragment fragment = AddPropertyDialogFragment.newInstance(propertyCode);
         fragment.show(fm, EXTRA_FRAGMENT);
     }
 
@@ -207,8 +206,6 @@ public class PropertyDetailActivity extends AppCompatActivity implements
     @Override
     public void showClientInformation(Client client) {
         if (client != null) {
-            clientId = client.getClientId();
-
             adsTextView.setVisibility(View.VISIBLE);
             adsTextView.setText(client.getName());
 
