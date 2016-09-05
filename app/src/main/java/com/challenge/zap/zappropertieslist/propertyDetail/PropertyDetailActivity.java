@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +39,7 @@ public class PropertyDetailActivity extends AppCompatActivity implements
 
     public static final String TAG = PropertyDetailActivity.class.getSimpleName();
     public static final String EXTRA_FRAGMENT = "AddProperty";
+    public static final String EXTRA_URL = "url";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -129,9 +131,17 @@ public class PropertyDetailActivity extends AppCompatActivity implements
     @BindView(R.id.date_text)
     TextView dtTextView;
 
+    @BindView(R.id.image)
+    ImageView photoImageView;
+    @BindView(R.id.photos)
+    TextView photosTextView;
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
+
     private int propertyCode;
     private String urlImage;
     private PropertyDetailContract.UserActionListener userActionListener;
+    private PhotoAdapter photoAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -326,6 +336,16 @@ public class PropertyDetailActivity extends AppCompatActivity implements
 
         ofTextView.setVisibility(View.VISIBLE);
         ofTextView.setText(offer);
+
+    }
+
+    @Override
+    public void showPhotos(List<String> list) {
+        photoImageView.setVisibility(View.VISIBLE);
+        photosTextView.setVisibility(View.VISIBLE);
+        viewPager.setVisibility(View.VISIBLE);
+        photoAdapter = new PhotoAdapter(getSupportFragmentManager(), list);
+        viewPager.setAdapter(photoAdapter);
 
     }
 

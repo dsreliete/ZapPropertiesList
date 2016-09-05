@@ -41,6 +41,8 @@ public class PropertyDetail {
     public String information;
     @SerializedName("DataAtualizacao")
     public String date;
+    @SerializedName("Fotos")
+    public List<String> photosList;
 
     public PropertyDetail(int codeProperty, String propertyType, int area, int dormitory, int parking,
                           int price, Address address, int suites, Client client,
@@ -128,6 +130,10 @@ public class PropertyDetail {
         return date;
     }
 
+    public List<String> getPhotosList() {
+        return photosList;
+    }
+
     @Override
     public String toString() {
         return "PropertyDetail{" +
@@ -147,6 +153,7 @@ public class PropertyDetail {
                 ", offer='" + offer + '\'' +
                 ", information='" + information + '\'' +
                 ", date='" + date + '\'' +
+                ", photosList='" + photosList + '\'' +
                 '}';
     }
 }

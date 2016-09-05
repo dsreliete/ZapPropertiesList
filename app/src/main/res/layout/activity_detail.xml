@@ -229,12 +229,44 @@
 
         </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/detail_container"
+                    android:id="@+id/photo_container">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:src="@drawable/ic_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/photos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/image"
+                        android:text="@string/photo_title"
+                        style="@style/TextView.Title"/>
+
+                    <android.support.v4.view.ViewPager
+                        android:layout_below="@+id/photos"
+                        android:gravity="center_vertical"
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+                    </android.support.v4.view.ViewPager>
+
+                </RelativeLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@id/detail_container"
+                android:layout_below="@id/photo_container"
                 android:id="@+id/charac_container">
 
                 <ImageView

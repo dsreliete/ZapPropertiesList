@@ -44,6 +44,8 @@ public class PropertyDetailContract {
         void showInformation(String information);
 
         void showSale(String offer);
+
+        void showPhotos(List<String> list);
     }
 
     interface UserActionListener{

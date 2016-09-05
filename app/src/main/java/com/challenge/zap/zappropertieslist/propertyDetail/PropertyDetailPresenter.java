@@ -86,6 +86,10 @@ public class PropertyDetailPresenter implements PropertyDetailContract.UserActio
                 propertyContract.showSale(property.getOffer());
             }
 
+            if (property.getPhotosList() != null){
+                propertyContract.showPhotos(property.getPhotosList());
+            }
+
         }else{
             propertyContract.showDetailContainer(false);
             propertyContract.showNoDetail();
